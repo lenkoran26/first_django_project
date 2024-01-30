@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponsePermanentRedirect
+from django.contrib.auth.decorators import login_required
 from .models import Post
 from .forms import PostForm
 # Create your views here.
@@ -37,6 +38,7 @@ def post_list(request):
     context = {'posts': posts, 'menu': menu}
     return render(request, template_name='main/post_list.html', context=context)
 
+@login_required
 def post_add(request):
     title = "Создать пост"
     if request.method == "GET":
@@ -49,7 +51,7 @@ def post_add(request):
         
         if post_form.is_valid():
             post = Post()
-            post.author = post_form.cleaned_data['author']
+            post.author = request.user
             post.title = post_form.cleaned_data['title']
             post.text = post_form.cleaned_data['text']
             post.image = post_form.cleaned_data['image']
