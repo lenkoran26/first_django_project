@@ -9,7 +9,11 @@ from .models import Post
 #     text = forms.CharField(widget=forms.Textarea, label='Текст поста')
 #     image = forms.ImageField(required=False)
 
+
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = "__all__"
+       
+        
+       

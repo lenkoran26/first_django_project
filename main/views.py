@@ -86,12 +86,15 @@ def post_delete(request, pk):
     post = Post.objects.filter(pk=pk).first()
     
     if request.method == "POST":
-        post.delete()
-        return redirect("main:post_list")
+        if "delete" in request.POST:
+            post.delete()
+            return redirect("main:post_list")
+        if "cancel" in request.POST:
+            return redirect("main:post_list")
     
     form = PostForm(instance=post)
-    return render(request, "main/post_delete.html", {"form": form, "menu": menu})
+    return render(request, "main/post_delete.html", {"form": form, "menu": menu, "post": post})
     
-    
-            
+
+
     

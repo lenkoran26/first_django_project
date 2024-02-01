@@ -1,11 +1,16 @@
 {% extends "main/base.html" %}
 
 {% block content %}
-<h1>Удалить пост?</h1>
+    <p> Автор - {{post.author}} </p>
+    <p> Заголовок - {{post.title}} </p>
+    <p> Текст поста - {{post.text}} </p>
+    <p> Дата создания - {{post.created_date}} </p>
+    <hr>
+    <h1>Удалить пост?</h1>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p}}
-        <button type="Submit"> Удалить</button>
+        <button type="Submit" name="delete"> Удалить</button>
+        <button type="Submit" name="cancel"> Отменить</button>
     </form>
 
 {% endblock content %}
